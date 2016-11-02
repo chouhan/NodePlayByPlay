@@ -79,10 +79,34 @@ function addOne(number, callback){
     });
 }*/
 
-async.map(['/Users/rakeshchouhan/WebstormProjects/NodePlayByPlay/data/testFile.txt',
-     '/Users/rakeshchouhan/WebstormProjects/NodePlayByPlay/data/testFile1.txt',
-     '/Users/rakeshchouhan/WebstormProjects/NodePlayByPlay/data/testFile2.txt'], fs.stat, function(err, results) {
+
+
+var files = ['/Users/rakeshchouhan/WebstormProjects/NodePlayByPlay/data/testFile.txt',
+    '/Users/rakeshchouhan/WebstormProjects/NodePlayByPlay/data/testFile1.txt',
+    '/Users/rakeshchouhan/WebstormProjects/NodePlayByPlay/data/testFile2.txt'];
+
+async.map(files, fs.stat, function(err, stats) {
         // results is now an array of stats for each file
         // debugger;
-        console.log('Files Stats : ' + results);
+        // console.log('Files Stats : ' + results);
+    stats
+    // Make sure this is a file. If it isn't, return (undefined).
+    // Convert the file stat to an object with name and stat info
+        .map(function (stat, index) {
+            if (!stat.isFile()) return;
+            return {
+                name: files[index],
+                stat: stat
+            };
+        })
+        // Filter out the undefined (and unwanted) values
+        .filter(function (val) { return !!val; })
+        // Sort the remaining files by size, using the stat object
+        .sort(function (a, b) { return a.stat.size - b.stat.size; })
+        // Reverse the array so it's descending
+        .reverse()
+        // And list 'em out
+        .forEach(function (file) {
+            console.log('%dB : %s', file.stat.size, file.name);
+        });
 });

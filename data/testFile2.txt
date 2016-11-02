@@ -1,18 +1,5 @@
 Anatomy of HashMap
 
-
-
-HashMap is a data structure used in Java.
-HashMap extends AbstractMap and implements Map interface.
-HashMap contains only unique elements.
-HashMap is similar to HashTable, except for..
-	1) HashMap methods are NOT synchronized.
-	2) HashMap allows null key and null values (may have one null key and multiple null values)
-HashMap contains entries(key and value) whereas a HashSet contains only values
-HashMap is not an ordered collection, which means that it does not return the keys and values in the same order they have been inserted into.
-HashMap does not do any sorting to the stored keys and Values.
-java.util.HashMap or its super classes needs to be imported in order to use HashMap class and methods.
-
 Since HashMap is not Synchronized and if multiple threads access a hash map concurrently, and at least one of the threads modifies the map structurally (adding or deleting one or more mappings or changing the value associate with a key are called structural modification), it must be synchronized externally.
 	In order to synchronize HashMap at creation time, to prevent accidental unsynchronized access to map.
 		Map m = Collections.synchronizedMap(new HashMap(…));
