@@ -1,7 +1,5 @@
 Anatomy of HashMap
 
-
-
 HashMap is a data structure used in Java.
 HashMap extends AbstractMap and implements Map interface.
 HashMap contains only unique elements.
